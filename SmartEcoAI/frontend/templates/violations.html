@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}SmartEcoAI | Violations{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Violation log</p>
+        <h1>Capture and review incident details</h1>
+    </div>
+</section>
+
+<section class="panel-card wide-card">
+    <h3>Latest incidents</h3>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Type</th>
+                    <th>Severity</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>08:14</td>
+                    <td>Illegal dumping</td>
+                    <td>High</td>
+                    <td>Pending</td>
+                </tr>
+                <tr>
+                    <td>09:32</td>
+                    <td>Street obstruction</td>
+                    <td>Medium</td>
+                    <td>Reviewed</td>
+                </tr>
+                <tr>
+                    <td>11:20</td>
+                    <td>Traffic violation</td>
+                    <td>High</td>
+                    <td>Escalated</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

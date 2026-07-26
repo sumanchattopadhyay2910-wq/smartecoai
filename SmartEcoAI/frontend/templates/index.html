@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}SmartEcoAI | Home{% endblock %}
+
+{% block content %}
+<section class="hero-card">
+    <div>
+        <p class="eyebrow">AI-powered civic monitoring</p>
+        <h1>Observe traffic, detect issues, and support safer communities.</h1>
+        <p class="hero-copy">SmartEcoAI helps teams review camera feeds, track suspicious activity, and generate reports with clear evidence.</p>
+        <div class="actions">
+            <a class="button primary" href="{{ url_for('camera.camera') }}">Open camera view</a>
+            <a class="button secondary" href="{{ url_for('dashboard.dashboard') }}">Go to dashboard</a>
+        </div>
+    </div>
+    <div class="hero-panel">
+        <h3>Live overview</h3>
+        <ul>
+            <li>Camera streams ready for review</li>
+            <li>Detection events logged automatically</li>
+            <li>Instant reporting and evidence storage</li>
+        </ul>
+    </div>
+</section>
+
+<section class="card-grid">
+    <article class="info-card">
+        <h3>Camera Intake</h3>
+        <p>Upload images or clips and prepare them for review.</p>
+    </article>
+    <article class="info-card">
+        <h3>Detection Engine</h3>
+        <p>Classify objects and surface potential violations quickly.</p>
+    </article>
+    <article class="info-card">
+        <h3>Evidence & Reports</h3>
+        <p>Store findings and generate daily or weekly summaries.</p>
+    </article>
+</section>
+{% endblock %}

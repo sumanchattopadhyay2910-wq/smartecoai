@@ -1,0 +1,11 @@
+:root {
+  --accent: #4fc3f7;
+}
+
+.stat-card {
+  min-height: 140px;
+}
+
+.panel-card {
+  min-height: 220px;
+}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}SmartEcoAI | Camera{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Camera workspace</p>
+        <h1>Upload and review media assets</h1>
+    </div>
+</section>
+
+<section class="panel-grid">
+    <article class="panel-card">
+        <h3>Upload media</h3>
+        <p>Drag in footage or images to begin review. The app will store the files under the uploads directory.</p>
+        <div class="actions">
+            <a class="button primary" href="{{ url_for('home.home') }}">Back to home</a>
+        </div>
+    </article>
+    <article class="panel-card">
+        <h3>Preview queue</h3>
+        <ul class="list">
+            <li>Camera 01 • 12:15 PM</li>
+            <li>Camera 02 • 12:42 PM</li>
+            <li>Camera 03 • 01:05 PM</li>
+        </ul>
+    </article>
+</section>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}SmartEcoAI | Dashboard{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Operations dashboard</p>
+        <h1>Monitor events at a glance</h1>
+    </div>
+    <a class="button primary" href="{{ url_for('reports.reports') }}">View reports</a>
+</section>
+
+<section class="stats-grid">
+    <article class="stat-card">
+        <h3>Active cameras</h3>
+        <p class="stat-value" data-target="8">0</p>
+    </article>
+    <article class="stat-card">
+        <h3>Pending checks</h3>
+        <p class="stat-value" data-target="14">0</p>
+    </article>
+    <article class="stat-card">
+        <h3>Resolved today</h3>
+        <p class="stat-value" data-target="5">0</p>
+    </article>
+</section>
+
+<section class="panel-grid">
+    <article class="panel-card">
+        <h3>Recent activity</h3>
+        <ul class="list">
+            <li>Parking obstruction flagged near Main Street</li>
+            <li>Illegal dumping alert reviewed by field team</li>
+            <li>Traffic camera feed synchronized successfully</li>
+        </ul>
+    </article>
+    <article class="panel-card">
+        <h3>Priority cases</h3>
+        <ul class="list">
+            <li>High severity: 2</li>
+            <li>Medium severity: 4</li>
+            <li>Low severity: 7</li>
+        </ul>
+    </article>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
