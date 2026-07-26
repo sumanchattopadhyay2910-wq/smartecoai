@@ -4,26 +4,101 @@
 {% block content %}
 <section class="page-header">
     <div>
-        <p class="eyebrow">Camera workspace</p>
-        <h1>Upload and review media assets</h1>
+        <p class="eyebrow-pill">Camera workspace</p>
+        <h1>Upload a photo for face and policy-risk analysis</h1>
+        <p class="page-intro">
+            Submit a civic image and Gemini will summarize the scene, estimate visible faces, and flag any
+            possible compliance concerns. It is a screening tool, not a legal judgment.
+        </p>
     </div>
 </section>
 
-<section class="panel-grid">
-    <article class="panel-card">
-        <h3>Upload media</h3>
-        <p>Drag in footage or images to begin review. The app will store the files under the uploads directory.</p>
-        <div class="actions">
-            <a class="button primary" href="{{ url_for('home.home') }}">Back to home</a>
-        </div>
+<section class="panel-grid camera-grid">
+    <article class="panel-card camera-upload-card">
+        <h3>Upload photo</h3>
+        <p>Select a PNG, JPG, JPEG, or WEBP file to analyze.</p>
+
+        <form class="upload-form" method="post" enctype="multipart/form-data">
+            <label class="file-dropzone" for="photo">
+                <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+                <span>Choose a photo to inspect</span>
+                <small>Drop-in style picker for quick uploads</small>
+            </label>
+            <input id="photo" name="photo" type="file" accept="image/png,image/jpeg,image/webp" required>
+            <button class="cta-button cta-primary submit-button" type="submit">
+                Analyze with Gemini
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+        </form>
+
+        <p class="form-note">
+            For best results, upload a clear image with good lighting and minimal motion blur.
+        </p>
+
+        {% if error %}
+        <div class="notice notice-error">{{ error }}</div>
+        {% endif %}
     </article>
-    <article class="panel-card">
-        <h3>Preview queue</h3>
-        <ul class="list">
-            <li>Camera 01 • 12:15 PM</li>
-            <li>Camera 02 • 12:42 PM</li>
-            <li>Camera 03 • 01:05 PM</li>
-        </ul>
+
+    <article class="panel-card camera-result-card">
+        <div class="result-head">
+            <div>
+                <h3>Analysis result</h3>
+                <p>Live Gemini assessment for the uploaded image.</p>
+            </div>
+            {% if analysis %}
+            <span class="status-chip status-{{ analysis.policy_risk_level }}">{{ analysis.policy_risk_level|upper }}</span>
+            {% endif %}
+        </div>
+
+        {% if preview_image %}
+        <div class="preview-frame">
+            <img src="{{ preview_image }}" alt="Uploaded photo preview">
+        </div>
+        <p class="uploaded-name">{{ uploaded_name }}</p>
+        {% endif %}
+
+        {% if analysis %}
+        <div class="analysis-stack">
+            <div class="analysis-card">
+                <span class="analysis-label">Faces detected</span>
+                <strong>{{ 'Yes' if analysis.faces_detected else 'No' if analysis.faces_detected is not none else 'Unknown' }}</strong>
+            </div>
+            <div class="analysis-card">
+                <span class="analysis-label">Estimated face count</span>
+                <strong>{{ analysis.face_count if analysis.face_count is not none else 'Unknown' }}</strong>
+            </div>
+            <div class="analysis-card">
+                <span class="analysis-label">Scene summary</span>
+                <p>{{ analysis.scene_summary }}</p>
+            </div>
+            <div class="analysis-card">
+                <span class="analysis-label">Possible concerns</span>
+                {% if analysis.possible_concerns %}
+                <ul class="analysis-list">
+                    {% for concern in analysis.possible_concerns %}
+                    <li>{{ concern }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No specific concerns were identified.</p>
+                {% endif %}
+            </div>
+            <div class="analysis-card">
+                <span class="analysis-label">Recommended action</span>
+                <p>{{ analysis.recommended_action }}</p>
+            </div>
+            <div class="analysis-card">
+                <span class="analysis-label">Confidence note</span>
+                <p>{{ analysis.confidence_note }}</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fa-solid fa-image" aria-hidden="true"></i>
+            <p>Your analysis summary will appear here after upload.</p>
+        </div>
+        {% endif %}
     </article>
 </section>
 {% endblock %}
